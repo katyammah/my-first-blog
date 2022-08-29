@@ -1,22 +1,18 @@
-<html>
+{% extends 'blog/base.html' %}
 
-    <head>
-        <title>Things for good health</title>
-    </head>
-
-    <body>
-
-        <h1>О мёде</h1>
-
-        <div>
-        {% for post in posts %}
-            <h2><a href="">{{post.title}}</a></h2>
-            <p>{{post.text|linebreaksbr}}</p>
-            <p><em>{{post.published_date}}</em></p>
-
-        {% endfor %}
-
+{% block content %}
+        <div class="cover">
+            <h1>Одежда и аксессуары ручной работы</h1>
+            <div class = "catalog">
+                <h1><a href="{% url 'catalog' %}">Каталог товаров</a></h1>
+                <h5>Здесь вы можете посмотреть вещи в наличии и доступные к пошиву на заказ. </h5>
+                <a href =""><div class = "photos"></div></a>
+            </div>
+            {% for post in posts %}
+                <div class="post">
+                    <h1><a href="">{{ post.title }}</a></h1>
+                    <div class = "text"><p>{{ post.text|linebreaksbr }}</p></div>
+                </div>
+            {% endfor %}
         </div>
-
-    </body>
-</html>
+{% endblock %}
