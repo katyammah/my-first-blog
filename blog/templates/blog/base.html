@@ -4,6 +4,7 @@
 <html>
 
     <head>
+    <meta charset="UTF-8">
         <title>Things for good health</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -14,16 +15,18 @@
     <body>
         <header>
             <div class="links">
-                <a href="#">Новости</a>
-                <a href="#">Сертификаты</a>
-                <a href="#">Контакты</a>
-                <a href="#">Ваша корзина</a>
+                <a href="{% url 'post_list' %}">На главную</a>
+                <a href="{% url 'catalog' %}">Каталог</a>
+                <a href="{% url 'contacts' %}">Контакты</a>
+                <a href="{% url 'customer_data' %}" class="top-menu">Оформить заказ</a>
             </div>
             <div class="page-header">
                 <h1>By Mah</h1>
+
             </div>
 
         </header>
+
             {% block content %}
             {% endblock %}
 

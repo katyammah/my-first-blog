@@ -6,7 +6,7 @@
             <div class = "catalog">
                 <h1><a href="{% url 'catalog' %}">Каталог товаров</a></h1>
                 <h5>Здесь вы можете посмотреть вещи в наличии и доступные к пошиву на заказ. </h5>
-                <a href =""><div class = "photos"></div></a>
+                <a href ="{% url 'catalog' %}"><div class = "photos"></div></a>
             </div>
             {% for post in posts %}
                 <div class="post">
