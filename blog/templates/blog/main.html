@@ -7,12 +7,13 @@
                 <h1><a href="{% url 'catalog' %}">Каталог товаров</a></h1>
                 <h5>Здесь вы можете посмотреть вещи в наличии и доступные к пошиву на заказ. </h5>
                 <a href ="{% url 'catalog' %}">
-                    <div class = "photos"></div></a>
+                    <div class = "photos"><img src="../static/css/img/photo_2022-08-26_23-56-19.jpg" class="img-responsive"></div></a>
+
             </div>
             {% for post in posts %}
                 <div class="post">
                     <h1><a href="">{{ post.title }}</a></h1>
-                    <div class = "text"><p>{{ post.text|linebreaksbr }}</p></div>
+                    <div class = "text"><h2>{{ post.text|linebreaksbr }}</h2></div>
                 </div>
             {% endfor %}
         </div>

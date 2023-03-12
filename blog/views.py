@@ -1,22 +1,27 @@
 from django.shortcuts import render
-from .models import Post, Order
+from .models import Post, Product
 from django.utils import timezone
-from .forms import OrderForm
+from .forms import OrderForm, ProductForm
 from django.shortcuts import redirect
 
 
-def post_list(request):
+def main_page(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by("published_date")
-    return render(request, 'blog/post_list.html', {'posts': posts})
-
-
-# Create your views here.
+    return render(request, 'blog/main.html', {'posts': posts})
 
 
 def catalog(request):
-    # clothes = Post.objects.filter(title__contains = "Жакет").order_by("published_date")
-    return render(request, 'blog/catalog.html')
-
+    products = Product.objects.order_by('-created_date')
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.author = request.user
+            product.save()
+            return redirect('catalog')
+    else:
+        form = ProductForm()
+    return render(request, 'blog/catalog.html', {'products': products, 'form': form})
 
 
 def customer_data(request):

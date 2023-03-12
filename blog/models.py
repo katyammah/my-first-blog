@@ -23,10 +23,24 @@ class Order(models.Model):
     tel = models.CharField('Телефон', max_length=20)
     email = models.CharField('Email', max_length=20)
     adress = models.TextField('Адрес')
-    question= models.TextField('Вопросы')
+    question = models.TextField('Вопросы')
 
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = 'Contact'
+
+class Product(models.Model):
+    class StatusOfProduct(models.TextChoices):
+        ready = '(готовый товар)', ('готовый товар')
+        to_order = '(на заказ)', ('на заказ')
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField("Название", max_length=200)
+    status = models.CharField("Статус товара", max_length=20, choices=StatusOfProduct.choices)
+    price = models.IntegerField("Цена")
+    picture = models.ImageField("Изображение")
+    description = models.TextField("Описание товара")
+    created_date = models.DateTimeField('Дата занесения товара в каталог', default=timezone.now)
+
+    def __str__(self):
+        return self.title
