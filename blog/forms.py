@@ -1,5 +1,5 @@
 from .models import Order, Product
-from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select
+from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select, DateInput, ClearableFileInput, PasswordInput
 
 
 class OrderForm(ModelForm):
@@ -8,6 +8,8 @@ class OrderForm(ModelForm):
         fields = ['name', 'tel', 'email', 'adress', 'question']
 
         widgets = {
+
+
             'name': TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Имя и Фамилия'
@@ -35,12 +37,17 @@ class OrderForm(ModelForm):
         }
 
 
+class DateInput (DateInput):
+    input_type = 'date'
+
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['author', 'title', 'status', 'price', 'picture', 'description', 'created_date']
+        fields = ['title', 'status', 'price',  'description', 'created_date', 'picture']
 
         widgets = {
+
+
             'title': TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Название'
@@ -58,5 +65,16 @@ class ProductForm(ModelForm):
             'description': Textarea(attrs={
                 'class': "form-control",
                 'placeholder': 'Описание товара'
+            }),
+
+            'created_date': DateInput (attrs={
+                'class': "form-control",
+            }),
+
+            'picture': ClearableFileInput(attrs={
+                'class': "form-control",
+
             })
         }
+
+

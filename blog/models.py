@@ -33,12 +33,11 @@ class Product(models.Model):
     class StatusOfProduct(models.TextChoices):
         ready = '(готовый товар)', ('готовый товар')
         to_order = '(на заказ)', ('на заказ')
-
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    #author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField("Название", max_length=200)
     status = models.CharField("Статус товара", max_length=20, choices=StatusOfProduct.choices)
     price = models.IntegerField("Цена")
-    picture = models.ImageField("Изображение")
+    picture = models.ImageField("Изображение", null=True)
     description = models.TextField("Описание товара")
     created_date = models.DateTimeField('Дата занесения товара в каталог', default=timezone.now)
 

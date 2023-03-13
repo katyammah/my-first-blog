@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Product
 from django.utils import timezone
 from .forms import OrderForm, ProductForm
-from django.shortcuts import redirect
+
 
 
 def main_page(request):
@@ -13,7 +13,7 @@ def main_page(request):
 def catalog(request):
     products = Product.objects.order_by('-created_date')
     if request.method == "POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.author = request.user

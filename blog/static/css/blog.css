@@ -247,13 +247,14 @@ form {
     color: green
 }
 
-
 .addproduct {
-	border: 3px solid #000;
+    background: rgba(255,255,255,0.5);
+	border: 1px solid #000;
     float: right;
     margin-right: 25%;
     margin-top: 100px;
     width: 50%;
+    text-align: center;
 }
 
 
