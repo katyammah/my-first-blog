@@ -37,7 +37,7 @@ class Product(models.Model):
     title = models.CharField("Название", max_length=200)
     status = models.CharField("Статус товара", max_length=20, choices=StatusOfProduct.choices)
     price = models.IntegerField("Цена")
-    picture = models.ImageField("Изображение", null=True)
+    picture = models.ImageField("Изображение", null=True, upload_to='images/')
     description = models.TextField("Описание товара")
     created_date = models.DateTimeField('Дата занесения товара в каталог', default=timezone.now)
 
