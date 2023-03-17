@@ -1,6 +1,6 @@
 from .models import Order, Product
 from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select, DateInput, ClearableFileInput
-from PIL import Image
+
 
 class OrderForm(ModelForm):
     class Meta:
