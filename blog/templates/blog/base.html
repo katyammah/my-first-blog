@@ -18,7 +18,8 @@
                 <a href="{% url 'main' %}">На главную</a>
                 <a href="{% url 'catalog' %}">Каталог</a>
                 <a href="{% url 'contacts' %}">Контакты</a>
-                <a href="{% url 'customer_data' %}" class="top-menu">Оформить заказ</a>
+                <a href="{% url 'customer_data' %}">Задать вопрос</a>
+                <a href="{% url 'registration' %}">Личный кабинет{% if user.is_authenticated %}: {{ user }} {% endif %} </a>
             </div>
             <div class="page-header">
                 <h1>By Mah</h1>

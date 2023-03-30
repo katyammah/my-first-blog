@@ -20,7 +20,7 @@
                        </div>
 
                         <h2>{{ product.title }} </h2>
-                        <h3>{{ product.price }} P. </h3><br>
+                        <h3>{{ product.price }} P. </h3>
                         <h3>{{ product.status }} </h3>
                     </a>
 
@@ -32,7 +32,7 @@
 
 
 
-
+ {% if user.is_superuser %}
                 <div class="addproduct">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -46,10 +46,8 @@
                         {{ form.picture}} <br>
                         <p><button class="btn btn-default btn-lg" type="submit">Готово</button></p>
                     </form>
-
-
-
              </div>
+ {% endif %}
 
         </div>
 

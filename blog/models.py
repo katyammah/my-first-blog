@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+from django.views import View
 
 
 class Post(models.Model):
@@ -33,7 +35,8 @@ class Product(models.Model):
     class StatusOfProduct(models.TextChoices):
         ready = '(готовый товар)', ('готовый товар')
         to_order = '(на заказ)', ('на заказ')
-    #author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField("Название", max_length=200)
     status = models.CharField("Статус товара", max_length=20, choices=StatusOfProduct.choices)
     price = models.IntegerField("Цена")
@@ -43,3 +46,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class User(AbstractUser):
+    bio = models.TextField(max_length=500, null=True)

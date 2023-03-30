@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class='coverreg'>
+    <h3>Регистрация на сайте:</h3><br>
+    <form action="{% url 'register' %}" method='post'>
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p>
+            <button class="btn btn-default btn-lg" type="submit">Подтвердить</button>
+        </p>
+    </form>
+</div>
+{% endblock %}

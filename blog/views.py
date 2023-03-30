@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Post, Product
 from django.utils import timezone
-from .forms import OrderForm, ProductForm
-
+from .forms import OrderForm, ProductForm, UserCreateForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import PasswordResetView
 
 
 def main_page(request):
@@ -12,6 +13,7 @@ def main_page(request):
 
 def catalog(request):
     products = Product.objects.order_by('-created_date')
+
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -43,3 +45,26 @@ def customer_data_ok(request):
 
 def contacts(request):
     return render(request, 'blog/contacts.html')
+
+
+def registration(request):
+    return render(request, 'blog/registration.html')
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreateForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+
+class MyPasswordResetView(PasswordResetView):
+    template_name = 'registration/password_reset.html'

@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class = 'coverreg'>
+
+        {% if user.is_authenticated %}
+            <h1>Пользователь: {{ user }}</h1>
+            <h3><a href = "{% url 'logout' %}">Выйти</a></h3>
+
+        {% else %}
+            <h3> <a href = "{% url 'login' %}">Войти</a></h3>
+            <h3> <a href = "{% url 'register' %}">Регистрация</a></h3>
+        {% endif %}
+
+    </div>
+{% endblock %}
