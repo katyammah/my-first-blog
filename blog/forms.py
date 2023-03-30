@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['name', 'tel', 'email', 'adress', 'question']
+        fields = ['name', 'tel', 'email', 'question']
 
         widgets = {
 
@@ -28,10 +28,6 @@ class OrderForm(ModelForm):
                 'placeholder': 'Email'
             }),
 
-            'adress': Textarea(attrs={
-                'class': "form-control",
-                'placeholder': 'Ваш адрес'
-            }),
 
             'question': Textarea(attrs={
                 'class': "form-control",

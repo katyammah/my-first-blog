@@ -24,7 +24,6 @@ class Order(models.Model):
     name = models.CharField('Имя и фамилия', max_length=50)
     tel = models.CharField('Телефон', max_length=20)
     email = models.CharField('Email', max_length=20)
-    adress = models.TextField('Адрес')
     question = models.TextField('Вопросы')
 
     def __str__(self):
