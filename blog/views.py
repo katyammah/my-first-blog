@@ -107,3 +107,7 @@ def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def checkout(request):
+    return render(request, 'blog/checkout.html')
