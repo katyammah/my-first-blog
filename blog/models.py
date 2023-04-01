@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
-from django.views import View
 
 
 class Post(models.Model):
@@ -48,4 +47,14 @@ class Product(models.Model):
 
 
 class User(AbstractUser):
-    bio = models.TextField(max_length=500, null=True)
+    bio = models.TextField('Описание пользователя', max_length=500, null=True)
+
+
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Корзина пользователя {self.user} - Товар {self.product}'

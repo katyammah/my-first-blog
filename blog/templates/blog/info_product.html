@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+<div class="wraperf">
+
+    <div class="photoofproduct">
+        <img src="{{ product.picture.url }}">
+    </div>
+
+    <div class="infoproduct">
+        <h1>{{ product.title }}</h1><br>
+        <h2>Статус товара: {{ product.status }}</h2>
+        <h2>Цена: {{ product.price }} р.</h2>
+        <h2>Описание: {{ product.description }}</h2><br>
+
+        {% if user.is_authenticated %}
+        <button class="btn btn-default btn-lg" type="submit"><a href="{% url 'basket_add' product.id %}">Добавить в
+            корзину</a></button>
+
+        {% else %}
+        <h3>Войдите в <a href="{% url 'registration'  %}">личный кабинет</a>, чтобы добавить товар в корзину.</h3>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

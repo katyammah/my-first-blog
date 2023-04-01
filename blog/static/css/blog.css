@@ -203,7 +203,6 @@ form {
     position: relative;
 	overflow: hidden;
 	border: 5px solid #fff;
-
 }
 
 .photoofthing img {
@@ -298,8 +297,80 @@ form {
     font-size: 2em;
 }
 
-
 .coverreg a{
-    font-size: 1.2em;
+    font-size: 1em;
     color: black;
+}
+
+
+.infoproduct{
+    margin-top: 50px;
+    display: inline-block;
+}
+
+.infoproduct h1 {
+    font-size: 3.5em;
+    color: black;
+    display: inline-block;
+}
+
+.infoproduct h3 a{
+    font-size: 1.5em;
+    color: 4b7075;
+}
+
+.photoofproduct {
+    float: left;
+}
+
+.photoofproduct img {
+	height: 600px;
+	margin: 70px 60px;
+	border: solid black 0.1em;
+	padding: 3px;
+}
+
+.wraperf {
+    display: flex;
+}
+
+.infoproduct button a{
+    color: grey;
+    text-decoration: none;
+}
+
+
+@media only screen and (min-width: 450px) {
+	.photoofproduct img {
+		height: 400px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.photoofproduct img {
+		height: 500px;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.photoofproduct img {
+		height: 600px;
+	}
+}
+
+.baskettable {
+    text-align: center;
+    width: 60%;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+.basket button a{
+    color: grey;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.headoftable {
+    background: rgba(255,255,255,0.5);
 }

@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
-from .models import Post, Product
+from django.shortcuts import render, redirect, HttpResponseRedirect
+from .models import Post, Product, Basket
 from django.utils import timezone
 from .forms import OrderForm, ProductForm, UserCreateForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordResetView
+from django.views.generic import DetailView
 
 
 def main_page(request):
@@ -21,6 +22,7 @@ def catalog(request):
             product.author = request.user
             product.save()
             return redirect('catalog')
+
     else:
         form = ProductForm()
     return render(request, 'blog/catalog.html', {'products': products, 'form': form})
@@ -48,7 +50,20 @@ def contacts(request):
 
 
 def registration(request):
-    return render(request, 'blog/registration.html')
+    user = request.user
+    products = Product.objects.order_by('-created_date')
+    if user.is_authenticated:
+        basketofuser = Basket.objects.filter(user=request.user)
+        endsum = 0
+        for basket in basketofuser:
+            endsum += basket.product.price
+
+        return render(request, 'blog/registration.html', {'products': products,
+                                                          'basketofuser': basketofuser,
+                                                          'endsum': endsum
+                                                          })
+    else:
+        return render(request, 'blog/registration.html', {'products': products})
 
 
 def register(request):
@@ -68,3 +83,27 @@ def register(request):
 
 class MyPasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'
+
+
+class DetailOfProduct(DetailView):
+    model = Product
+    template_name = 'blog/info_product.html'
+
+
+
+def basket_add(request, product_id):
+    user = request.user
+    product = Product.objects.get(id=product_id)
+    if user.is_authenticated:
+        baskets = Basket.objects.filter(user=user, product=product)
+        if not baskets.exists():
+            Basket.objects.create(user=user, product=product, quantity=1)
+            return redirect('registration')
+        else:
+            return redirect('registration')
+
+
+def basket_remove(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

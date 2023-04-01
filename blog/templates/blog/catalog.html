@@ -3,53 +3,46 @@
 
 {% block content %}
 
-        <div class="covercatalog">
-                <h1>Каталог вещей в наличии и доступных к пошиву на заказ</h1>
+<div class="covercatalog">
+
+    <h1>Каталог вещей в наличии и доступных к пошиву на заказ</h1>
+
+    <ul class='products'>
+        {%for product in products%}
+        <li class='product-wrapper'>
+            <a href="{% url 'product' product.pk %}" class="product">
+
+                <div class="photoofthing">
+                    <img src="{{ product.picture.url }}">
+                </div>
+                <h2>{{ product.title }} </h2>
+                <h3>{{ product.price }} P. </h3>
+                <h3>{{ product.status }} </h3>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 
 
+    {% if user.is_superuser %}
+    <div class="addproduct">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Добавить новый товар: </h1><br>
 
-            <ul class = 'products'>
+            {{ form.title }} <br>
+            {{ form.status }} <br>
+            {{ form.price }} <br>
+            {{ form.description }} <br>
+            {{ form.created_date }} <br>
+            {{ form.picture}} <br>
+            <p>
+                <button class="btn btn-default btn-lg" type="submit">Готово</button>
+            </p>
+        </form>
+    </div>
+    {% endif %}
 
-                {%for product in products%}
-
-                <li class = 'product-wrapper'>
-                    <a href="" class="product">
-
-                       <div class = "photoofthing">
-                           <img src="{{ product.picture.url }}">
-                       </div>
-
-                        <h2>{{ product.title }} </h2>
-                        <h3>{{ product.price }} P. </h3>
-                        <h3>{{ product.status }} </h3>
-                    </a>
-
-                </li>
-
-                {% endfor %}
-
-            </ul>
-
-
-
- {% if user.is_superuser %}
-                <div class="addproduct">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                    <h1>Добавить новый товар: </h1><br>
-
-                        {{ form.title }} <br>
-                        {{ form.status }} <br>
-                        {{ form.price }} <br>
-                        {{ form.description }} <br>
-                        {{ form.created_date }} <br>
-                        {{ form.picture}} <br>
-                        <p><button class="btn btn-default btn-lg" type="submit">Готово</button></p>
-                    </form>
-             </div>
- {% endif %}
-
-        </div>
-
+</div>
 
 {% endblock %}

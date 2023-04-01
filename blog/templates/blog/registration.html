@@ -1,16 +1,59 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class = 'coverreg'>
 
-        {% if user.is_authenticated %}
-            <h1>Пользователь: {{ user }}</h1>
-            <h3><a href = "{% url 'logout' %}">Выйти</a></h3>
+<div class='coverreg'>
+
+    {% if user.is_authenticated %}
+    <h3>Пользователь: {{ user }}</h3><br>
+    <div class="basket">
+
+        {% if basketofuser %}
+        <h3>Ваша корзина:</h3><br>
+
+        <table class="baskettable" border="2">
+            <tr class="headoftable">
+                <td><h1> Название товара </h1></td>
+                <td><h1> Статус товара </h1></td>
+                <td><h1></h1></td>
+                <td><h1> Цена товара </h1></td>
+            </tr>
+
+            {% for basket in basketofuser %}
+            <tr>
+                <td><h1> {{ basket.product }} </h1></td>
+                <td><h1> {{ basket.product.status }} </h1></td>
+                <td><h1><a href="{% url 'basket_remove' basket.id %}"><i class="fa-solid fa-trash"></i></a></h1></td>
+                <td><h1> {{ basket.product.price }} P. </h1></td>
+            </tr>
+            {% endfor %}
+
+            <tr class="headoftable">
+                <td colspan="3"><h1>Общая сумма</h1></td>
+                <td><h1> {{ endsum }} P. </h1></td>
+            </tr>
+            </tr>
+        </table>
+        <br>
+
+        <button class="btn btn-default btn-lg" type="submit"><a href="">Оформить заказ</a></button>
+        <h1><a href="{% url 'catalog' %}">Продолжить покупки</a></h1>
 
         {% else %}
-            <h3> <a href = "{% url 'login' %}">Войти</a></h3>
-            <h3> <a href = "{% url 'register' %}">Регистрация</a></h3>
+        <h3>Ваша корзина пуста</h3>
+        <h1><a href="{% url 'catalog' %}">(Выбрать товар)</a></h1><br>
         {% endif %}
 
+
+        <h1><a href="{% url 'logout' %}">Выйти</a></h1>
     </div>
+
+
+    {% else %}
+
+    <h3><a href="{% url 'login' %}">Войти</a></h3>
+    <h3><a href="{% url 'register' %}">Регистрация</a></h3>
+    {% endif %}
+
+</div>
 {% endblock %}
