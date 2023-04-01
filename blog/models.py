@@ -5,6 +5,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Post(models.Model):
+    class Meta:
+        verbose_name = u'Пост'
+        verbose_name_plural = u'Посты'
+
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -20,6 +24,10 @@ class Post(models.Model):
 
 
 class Order(models.Model):
+    class Meta:
+        verbose_name = u'Вопрос'
+        verbose_name_plural = u'Вопросы'
+
     name = models.CharField('Имя и фамилия', max_length=50)
     tel = models.CharField('Телефон', max_length=20)
     email = models.CharField('Email', max_length=20)
@@ -30,6 +38,10 @@ class Order(models.Model):
 
 
 class Product(models.Model):
+    class Meta:
+        verbose_name = u'Товар'
+        verbose_name_plural = u'Товары'
+
     class StatusOfProduct(models.TextChoices):
         ready = '(готовый товар)', ('готовый товар')
         to_order = '(на заказ)', ('на заказ')
@@ -51,6 +63,10 @@ class User(AbstractUser):
 
 
 class Basket(models.Model):
+    class Meta:
+        verbose_name = u'Корзина'
+        verbose_name_plural = u'Корзины'
+
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(default=0)
