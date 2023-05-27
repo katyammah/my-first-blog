@@ -74,3 +74,4 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'Корзина пользователя {self.user} - Товар {self.product}'
+
